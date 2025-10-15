@@ -1,0 +1,17 @@
+# October 14, 2025
+# Given two strings, determine how many times the second string appears in the first.
+
+def count(text, parameter):
+
+    count = 0
+    lastFound = 0
+
+    while lastFound < len(text):
+        found = text[lastFound:].find(parameter)
+        if found != -1:
+            count += 1
+            lastFound += found + 1
+        else:
+            break
+    
+    return count
