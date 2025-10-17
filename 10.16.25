@@ -1,0 +1,61 @@
+def validate(email):
+
+    #Must contain exactly one @ symbol
+    atCount = 0
+    for char in email:
+        if char == '@':
+            atCount += 1
+    if atCount != 1:
+        print("does not contain @, or contains too many @s")
+        return False
+    
+    #Split email into local and domain
+    parts = email.split('@')
+    local = str(parts[0])
+    domain = str(parts[1])
+    print(f"local part: {local}")
+    print(f"domain part: {domain}")
+
+    #Local validation
+    localDotCount = 0
+    if local[0] == '.' or local[-1] == '.':
+        print("local starts or ends with a dot")
+        return False
+    for char in local:
+        if not(char.isalpha()):
+            if not(char.isnumeric()):
+                if char not in ['.', '_', '-']:
+                    print(f"found an invalid char at {local.find(char)}: {char}")
+                    return False
+        print(f"{char} is valid")
+        if char == '.':
+            print(f"found dot at {local.find(char)}: {char}")
+            localDotCount += 1
+        else:
+            localDotCount = 0
+        if localDotCount > 1:
+            print(f"found two dots in a row at {local.find('.')}")
+            return False
+
+    #Domain validation
+    if '.' not in domain:
+        return False
+    letterCount = 0
+    domainDotCount = 0
+    for i in range(domain.find('.'), len(domain)):
+        if domain[i] == '.':
+            print(f"found dot in domain at {i}")
+            domainDotCount += 1
+            if domainDotCount > 1:
+                print("domain has two dots in a row")
+                return False
+        else:
+            if domain[i].isalpha():
+                print(f"found char {domain[i]} in domain at {i}")
+                letterCount += 1
+            domainDotCount = 0
+    if letterCount < 2:
+        print("not enough chars in domain")
+        return False
+
+    return True
