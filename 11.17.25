@@ -1,0 +1,32 @@
+###
+November 17, 2025
+
+Fingerprint Test
+
+Given two strings representing fingerprints, determine if they are a match using the following rules:
+
+    Each fingerprint will consist only of lowercase letters (a-z).
+    Two fingerprints are considered a match if:
+        They are the same length.
+        The number of differing characters does not exceed 10% of the fingerprint length.
+###
+
+import string
+
+def is_match(fingerprint_a, fingerprint_b):
+
+    if len(fingerprint_a) != len(fingerprint_b):
+        return False
+
+    diffs = 0
+    lowAlphabet = list(string.ascii_lowercase)
+    for (char1, char2) in zip(fingerprint_a, fingerprint_b):
+        if (char1 not in lowAlphabet) or (char2 not in lowAlphabet):
+            return False 
+        if char1 != char2:
+            diffs += 1
+
+    if diffs > float(len(fingerprint_a) * 0.1):
+        return False
+    
+    return True
