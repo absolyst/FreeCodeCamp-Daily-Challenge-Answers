@@ -1,0 +1,11 @@
+###
+November 18, 2025
+
+Given a string, repeat its characters until the result is exactly 100 characters long. If your repetitions go over 100 characters, trim the extra so it's exactly 100.
+###
+
+def one_hundred(chars):
+    
+    while len(chars) < 100:
+        chars += chars
+    return chars[0:100]
