@@ -1,0 +1,21 @@
+###
+Business Day Count
+
+Given a start date and an end date, return the number of business days between the two.
+
+    Given dates are in the format "YYYY-MM-DD".
+    Weekdays are business days (Monday through Friday).
+    Weekends are not business days (Saturday and Sunday).
+    Include both the start and end dates when counting.
+###
+
+import datetime
+from datetime import date, timedelta
+
+def count_business_days(start, end):
+    start = datetime.date.fromisoformat(start)
+    end = datetime.date.fromisoformat(end)
+
+    all_days = (start + timedelta(x) for x in range((end - start).days + 1))
+    count = sum(1 for day in all_days if day.weekday() < 5)
+    return count
